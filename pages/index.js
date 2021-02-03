@@ -1,4 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Background from '../src/components/Background';
+import BackgroundInputs from '../src/components/BackgroundInputs';
+import Widget from '../src/components/Widget';
 
 const Title = styled.h1`
   font-size: 50px;
@@ -6,5 +9,7 @@ const Title = styled.h1`
 `
 
 export default function Home() {
-  return <Title>Mandarin</Title>
+  return(
+    <Background />
+  )
 }
