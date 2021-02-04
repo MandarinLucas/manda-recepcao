@@ -36,7 +36,7 @@ export default function Home() {
         <img src='logo.png' className="LogoMandarin"/>
         <Button onClick={() => 
         router.push({
-          pathname: '/create-offer',
+          pathname: '/email',
           query: {
             perfil: "Cliente"
           }
@@ -47,7 +47,7 @@ export default function Home() {
 
         <Button onClick={() => 
         router.push({
-          pathname: '/create-offer',
+          pathname: '/email',
           query: {
             perfil: "Fornecedor"
           }
@@ -58,7 +58,7 @@ export default function Home() {
 
         <Button onClick={() => 
         router.push({
-          pathname: '/create-offer',
+          pathname: '/email',
           query: {
             perfil: "Candidato"
           }
@@ -69,7 +69,7 @@ export default function Home() {
         
         <Button onClick={() => 
         router.push({
-          pathname: '/create-offer',
+          pathname: '/email',
           query: {
             perfil: "Outros"
           }

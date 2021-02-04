@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Widget from '../src/components/Widget';
 import BackgroundInputs from '../src/components/BackgroundInputs';
 import { useRouter } from 'next/router';
-import Background from '../src/components/Background';
 
 
 export default function Email() {
@@ -15,6 +14,21 @@ export default function Email() {
             <Head>
                 <title>Mandarin - Recepção</title>
             </Head>
+
+            <Widget>
+                <Widget.Body>
+                    <Widget.P>
+                        Seu e-mail
+                    </Widget.P>
+                    <Widget.Input type="email" placeholder="E-mail" />
+
+                    <Widget.Section>
+                        <Widget.Button>Voltar</Widget.Button>
+                        <Widget.Button>Avançar</Widget.Button>
+                    </Widget.Section>
+                </Widget.Body>
+            </Widget>
+            
 
         </BackgroundInputs>
      )
