@@ -1,27 +1,25 @@
 import styled from 'styled-components';
 
-import React from 'react';
-import PropTypes from 'prop-types';
+const BackgroundInputs = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: #ede2d5;
+  z-index: -2;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Medium";
+`;
 
-function Background({ className }) {
-  return (
-    <img src="images/bg2.png"/>
-  );
-}
+BackgroundInputs.Image = styled.img`
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
 
-Background.propTypes = {
-  className: PropTypes.string.isRequired,
-};
-
-const BackgroundInputs = styled(Background)`
-  margin: auto;
-  display: block;
-  width: 400px;
-  height: auto;
-  @media screen and (max-width: 500px) {
-    margin: 0;
-    width: 300px;
-  }
 `;
 
 export default BackgroundInputs;
