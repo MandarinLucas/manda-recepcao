@@ -1,12 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import Link from 'next/link';
 import Widget from '../src/components/Widget';
-import Background from '../src/components/Background'
-// import BackgroundInputs from '../src/components/BackgroundInputs';
-// import Widget from '../src/components/Widget';
-
+import Background from '../src/components/Background';
+import { useRouter } from 'next/router';
 
 
 const Button = styled.div`
@@ -25,11 +22,9 @@ const Button = styled.div`
   cursor: pointer;
 `
 
-const font = styled.div`
-
-`
-
 export default function Home() {
+  const router = useRouter();
+  
   return (
     <Background>
       <Background.Image src="bg.png"/>
@@ -39,19 +34,47 @@ export default function Home() {
      
       <Widget.Content>
         <img src='logo.png' className="LogoMandarin"/>
-        <Button>
+        <Button onClick={() => 
+        router.push({
+          pathname: '/create-offer',
+          query: {
+            perfil: "Cliente"
+          }
+        })
+        }>
           Cliente
         </Button>
 
-        <Button> 
+        <Button onClick={() => 
+        router.push({
+          pathname: '/create-offer',
+          query: {
+            perfil: "Fornecedor"
+          }
+        })
+        }> 
           Fornecedor
         </Button>
 
-        <Button>
+        <Button onClick={() => 
+        router.push({
+          pathname: '/create-offer',
+          query: {
+            perfil: "Candidato"
+          }
+        })
+        }>
           Candidato
         </Button>
         
-        <Button>
+        <Button onClick={() => 
+        router.push({
+          pathname: '/create-offer',
+          query: {
+            perfil: "Outros"
+          }
+        })
+        }>
           Outros
         </Button>
       </Widget.Content> 
