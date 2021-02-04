@@ -28,6 +28,6 @@ model visitantes {
   aceite      String
   quemvisitou String
   perfil      String
-  data        DateTime
-  hora        DateTime
+  data        DateTime  
+  hora        DateTime 
 }
