@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 
 export default function Email() {
+    const router = useRouter();
     return(
         <BackgroundInputs>
             <BackgroundInputs.Image src="bg2.png" />
@@ -23,7 +24,15 @@ export default function Email() {
                     <Widget.Input type="email" placeholder="E-mail" />
 
                     <Widget.Section>
-                        <Widget.Button>Voltar</Widget.Button>
+                        <Widget.Button onClick={() => 
+                            router.push({
+                            pathname: '/formulario',
+                            query: {
+                                perfil: "Fornecedor"
+                            }
+                            })
+                            }>
+                                Voltar</Widget.Button>
                         <Widget.Button>Avançar</Widget.Button>
                     </Widget.Section>
                 </Widget.Body>
