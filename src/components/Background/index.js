@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 const Background = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
   text-align: center;
   background-color: #ede2d5;
   z-index: -2;
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Medium";
 `;
 
 Background.Image = styled.img`

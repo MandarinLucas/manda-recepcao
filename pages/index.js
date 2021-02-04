@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import Image from 'next/image';
+import Link from 'next/link';
 import Widget from '../src/components/Widget';
 import Background from '../src/components/Background'
 // import BackgroundInputs from '../src/components/BackgroundInputs';
@@ -14,12 +14,18 @@ const Button = styled.div`
   justify-content: center;
   background: #00C389;
   padding: 2vh 2vh;
-  max-width: 25.391vw;
   border-radius: 0.5em;
   color: white;
+  box-shadow: 5px 8px 17px rgb(0 0 0 / 16%);
+  width: 300px;
+  font-size: 2.1875em;
+  margin: 0 0 4.9vh 0;
+  align-self: center;
+  z-index: 10;
+  cursor: pointer;
 `
 
-const BackgroundImg = styled.div`
+const font = styled.div`
 
 `
 
@@ -31,10 +37,24 @@ export default function Home() {
         <title>Mandarin - Recepção</title>
       </Head>
      
-        <Widget.Content>
-          <img src='logo.png' className="LogoMandarin"/>
-        </Widget.Content>
-              
+      <Widget.Content>
+        <img src='logo.png' className="LogoMandarin"/>
+        <Button>
+          Cliente
+        </Button>
+
+        <Button> 
+          Fornecedor
+        </Button>
+
+        <Button>
+          Candidato
+        </Button>
+        
+        <Button>
+          Outros
+        </Button>
+      </Widget.Content> 
     </Background>
   );
 }
