@@ -71,50 +71,53 @@ const Switch = styled.input `
 }
 `
 
-
-
 export default function Formulario() {
+  const router = useRouter();
     
     return(
         <BackgroundInputs>
-            <BackgroundInputs.Image src="bg2.png" />
-            <Head>
-                <title>Mandarin - Recepção</title>
-            </Head>
+          <BackgroundInputs.Image src="bg2.png" />
+          <Head>
+              <title>Mandarin - Recepção</title>
+          </Head>
 
-            <Widget>
-                <Widget.Body>
-                    <Widget.P>
-                        Seu nome
-                    </Widget.P>
-                    <Widget.Input type="email" placeholder="Nome" />
-                    <Widget.P>
-                        Celular
-                    </Widget.P>
-                    <Widget.Input type="number" placeholder="(00) 00000-0000" />
-                    <Widget.P>
-                      Vai se encontrar com: 
-                    </Widget.P>
-                    <Select name="cars" id="cars">
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
-                    </Select>
-                    
-                    <ContainerSwitch>
-                      <Switch type="checkbox"></Switch>
-                      <Widget.P>Aceito receber contatos da Mandarin</Widget.P>
-                    </ContainerSwitch>
+          <Widget>
+              <Widget.Body>
+                  <Widget.P>
+                      Seu nome
+                  </Widget.P>
+                  <Widget.Input type="email" placeholder="Nome" />
+                  <Widget.P>
+                      Celular
+                  </Widget.P>
+                  <Widget.Input type="phone" placeholder="(00) 00000-0000" id="tel"/>
+                  <Widget.P>
+                    Vai se encontrar com: 
+                  </Widget.P>
+                  <Select name="cars" id="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </Select>
+                  
+                  <ContainerSwitch>
+                    <Switch type="checkbox"></Switch>
+                    <Widget.P>Aceito receber contatos da Mandarin</Widget.P>
+                  </ContainerSwitch>
 
-                    <Widget.Section>
-                        <Widget.Button>Voltar</Widget.Button>
-                        <Widget.Button>Avançar</Widget.Button>
-                    </Widget.Section>
-                </Widget.Body>
-            </Widget>
-            
-
+                  <Widget.Section>
+                      <Widget.Button onClick={() => 
+                          router.push({
+                          pathname: '/email'
+                          })
+                          }>
+                            Voltar
+                        </Widget.Button>
+                      <Widget.Button>Confirmar</Widget.Button>
+                  </Widget.Section>
+              </Widget.Body>
+          </Widget>
         </BackgroundInputs>
   )
 }
