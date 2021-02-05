@@ -86,7 +86,6 @@ export default function Formulario() {
     async function fetchData() {
       const response = await api.get('api/index-hosts');
       setHosts(response.data);
-      console.log(response.data)
     }
     fetchData();
   }, [])
@@ -122,6 +121,7 @@ export default function Formulario() {
                       Celular
                   </Widget.P>
                   <Widget.InputMask 
+                  autocomplete= "off"
                   mask='(99) 99999-9999' 
                   maskChar=''
                   value={celular} 
@@ -180,7 +180,10 @@ export default function Formulario() {
                         </Widget.Button>
                       <Widget.Button disabled={validation.includes(false) ? true : false } onClick={() => 
                           router.push({
-                          pathname: '/confirmacao'
+                          pathname: '/confirmacao',
+                          query: {
+                            nome : nome
+                          }
                           })
                           }>Confirmar</Widget.Button>
                   </Widget.Section>

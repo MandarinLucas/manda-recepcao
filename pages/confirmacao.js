@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Widget from '../src/components/Widget';
 import Background from '../src/components/Background';
 import { useRouter } from 'next/router';
+import api from '../utils/api';
 
 
 const Button = styled.div`
@@ -22,9 +23,14 @@ const Button = styled.div`
   cursor: pointer;
 `
 
+const Span = styled.span`
+  color: #F64404;
+`;
+
 export default function Home() {
   const router = useRouter();
-  const nome = useState('');
+  const {nome} = router.query;
+  
   
   return (
     <Background>
@@ -35,7 +41,8 @@ export default function Home() {
      
       <Widget.Content>
         <img src='logo.png' className="LogoMandarin"/>
-        <h1>Seja bem-vindo à Mandarin {nome},  já iremos te receber! </h1>
+        <h1>Seja bem-vindo à Mandarin, <Span>{nome.split(' ').slice(0 , 1)}</Span>!<br/>
+        Já iremos te receber! </h1>
         
         <Button onClick={() => 
         router.push({

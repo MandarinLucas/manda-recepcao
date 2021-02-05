@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Widget from '../src/components/Widget';
 import Background from '../src/components/Background';
 import { useRouter } from 'next/router';
+import api from '../utils/api';
 
 
 const Button = styled.div`
@@ -24,6 +25,14 @@ const Button = styled.div`
 
 export default function Home() {
   const router = useRouter();
+  const [hosts , setHosts] = useState([]);
+  useEffect( () => {
+    async function fetchData() {
+      const response = await api.get('api/index-perfis');
+      setHosts(response.data);
+    }
+    fetchData();
+  }, [])
   
   return (
     <Background>
@@ -34,7 +43,21 @@ export default function Home() {
      
       <Widget.Content>
         <img src='logo.png' className="LogoMandarin"/>
-        <Button onClick={() => 
+
+        {hosts.map((host, index) => {
+          return (
+            <Button key={index} onClick={() => 
+              router.push({
+                pathname: '/email',
+                query: {
+                  perfil: host.nome_perfil
+                }
+              })
+              }>{host.nome_perfil}</Button>
+          )
+          
+        })}
+        {/* <Button onClick={() => 
         router.push({
           pathname: '/email',
           query: {
@@ -76,7 +99,7 @@ export default function Home() {
         })
         }>
           Outros
-        </Button>
+        </Button> */}
       </Widget.Content> 
     </Background>
   );
