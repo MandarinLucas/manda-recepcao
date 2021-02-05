@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import InputMask from 'react-input-mask';
 
 const Widget = styled.div`
 background-color: #ede2d5;
@@ -70,6 +71,27 @@ Widget.Input = styled.input`
   }
 `;
 
+Widget.InputMask = styled(InputMask)`
+  z-index: 10;
+  top: 0;
+  background: white;
+  padding: 2.6vh 2vw;
+  margin: 0 0 2vh 0;
+  font-size: 1.375em;
+  border-radius: 0.5em;
+  border: none;
+  color: #333333;
+  width: 70vw;
+  height: 1vh;
+
+  &:focus {
+    outline: none;
+    -webkit-box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
+    -moz-box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
+    box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
+  }
+`;
+
 Widget.P = styled.p`
   color: #333333;
   font-size: 1.125em;
@@ -98,6 +120,9 @@ Widget.Button = styled.button`
   border-style: none;
   outline: 0;
 
+  &:disabled {
+    opacity: .4;
+  }
 `;
 
 export default Widget;

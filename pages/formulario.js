@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Widget from '../src/components/Widget';
 import BackgroundInputs from '../src/components/BackgroundInputs';
 import { useRouter } from 'next/router';
+import InputMask from 'react-input-mask';
 
 const Select = styled.select`
   z-index: 10;
@@ -74,6 +75,12 @@ const Switch = styled.input `
 export default function Formulario() {
   const router = useRouter();
   const {perfil} = router.query;
+
+  const [ celular, setCelular ] = useState('');
+  const [ nome, setNome ] = useState('');
+  const [ quemVisitou, setQuemVisitou ] = useState('');
+  const [ validation, setValidation ] = useState([false, false, false]);
+  const [ aceite, setAceite ] = useState('sim');
     
     return(
         <BackgroundInputs>
@@ -87,15 +94,57 @@ export default function Formulario() {
                   <Widget.P>
                       Seu nome
                   </Widget.P>
-                  <Widget.Input type="email" placeholder="Nome" />
+                  <Widget.Input 
+                  type="text" 
+                  placeholder="Nome" 
+                  value={nome} 
+                  onChange={e => {
+                    setNome(e.target.value);
+                    let newValidation = validation;
+                    if (nome.length > 0) {
+                      newValidation[0] = true;
+                      setValidation(newValidation)
+                    } else {
+                      newValidation[0] = false;
+                      setValidation(newValidation)
+                    }
+                  }} />
                   <Widget.P>
                       Celular
                   </Widget.P>
-                  <Widget.Input type="phone" placeholder="(00) 00000-0000" id="tel"/>
+                  <Widget.InputMask 
+                  mask='(99) 99999-9999' 
+                  maskChar=''
+                  value={celular} 
+                  type="phone"
+                  placeholder="(00) 00000-0000" 
+                  id="tel" 
+                  onChange={e => {
+                    setCelular(e.target.value)
+                    let newValidation = validation;
+                    if (celular.length === 15) {
+                      newValidation[1] = true;
+                      setValidation(newValidation)
+                    } else {
+                      newValidation[1] = false;
+                      setValidation(newValidation)
+                    }
+                  }}/>
                   <Widget.P>
                     Vai se encontrar com: 
                   </Widget.P>
-                  <Select name="cars" id="cars">
+                  <Select name="cars" id="cars" value={quemVisitou} onChange={e => {
+                    setQuemVisitou(e.target.value);
+                    let newValidation = validation;
+                    if (quemVisitou.length >= 0) {
+                      newValidation[2] = true;
+                      setValidation(newValidation)
+                    } else {
+                      newValidation[2] = false;
+                      setValidation(newValidation)
+                    }
+                  }}>
+                    <option value=""></option>
                     <option value="volvo">Volvo</option>
                     <option value="saab">Saab</option>
                     <option value="mercedes">Mercedes</option>
@@ -103,7 +152,11 @@ export default function Formulario() {
                   </Select>
                   
                   <ContainerSwitch>
-                    <Switch type="checkbox"></Switch>
+                    <Switch type="checkbox" checked={aceite === 'sim' ? true : false} onChange={ e => {
+                        setAceite(aceite === 'sim' ? 'não' : 'sim')
+
+                        
+                    }}></Switch>
                     <Widget.P>Aceito receber contatos da Mandarin</Widget.P>
                   </ContainerSwitch>
 
@@ -116,7 +169,7 @@ export default function Formulario() {
                           }>
                             Voltar
                         </Widget.Button>
-                      <Widget.Button>Confirmar</Widget.Button>
+                      <Widget.Button disabled={validation.includes(false) ? true : false }>Confirmar</Widget.Button>
                   </Widget.Section>
               </Widget.Body>
           </Widget>
