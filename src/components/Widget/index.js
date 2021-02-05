@@ -52,6 +52,7 @@ Widget.Content = styled.div`
   h1 {
     z-index: 10;
     color: #757575;
+    margin-bottom: 6vh;
   }
 `;
 
