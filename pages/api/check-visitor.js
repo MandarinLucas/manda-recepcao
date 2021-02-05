@@ -3,6 +3,12 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
 const checkVisitor = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.statusCode = 405;
+    res.json({ error: `This endpoint do not receive ${req.method} request` });
+    return res;
+  }
+
   const { email } = req.body
 
   try {
