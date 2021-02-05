@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import moment from 'moment';
 import mandrill from 'mandrill-api';
 
 import htmlTemplateGenerator from '../../utils/message-template';
@@ -52,16 +51,16 @@ const arrived = async (req, res) => {
   const subject = `Reunião com ${nome} (${perfil})`;
 
   const message = {
-    html: htmlMessage,
-    text: "Olá Mundo",
-    subject,
-    from_email: 'apoio@mandarin.com.br',
-    from_name: 'Apoio Mandarin - Recepção',
-    to: [
+    "html": htmlMessage,
+    "text": "Olá Mundo",
+    "subject": subject,
+    "from_email": 'apoio@mandarin.com.br',
+    "from_name": 'Apoio Mandarin - Recepção',
+    "to": [
       {
-        email: 'luizfverissimo@gmail.com',
-        name: 'Luiz Fernando Verissimo',
-        type: 'to'
+        "email": 'luizfverissimo@gmail.com',
+        "name": 'Luiz Fernando Verissimo',
+        "type": 'to'
       },
     ]
   };
@@ -70,11 +69,11 @@ const arrived = async (req, res) => {
   const ip_pool = 'Main Pool';
   const send_at = new Date();
 
-  const messageJSON = [JSON.stringify(message)]
+  //const messageJSON = JSON.stringify(message)
 
   mandrillClient.messages.send(
     {
-      "message": messageJSON,
+      "message": message,
       "async": async,
       "ip_pool": ip_pool,
       "send_at": send_at
@@ -87,7 +86,7 @@ const arrived = async (req, res) => {
     },
     function(err) {
       res.statusCode = 400;
-      res.json({ error: `Error to send e-mail - ${err}` });
+      res.json({ error: `Error to send e-mail - ${err.message}` });
       console.log(err);
       return res;
     }
