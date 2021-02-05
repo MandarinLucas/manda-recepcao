@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Widget from '../src/components/Widget';
 import BackgroundInputs from '../src/components/BackgroundInputs';
 import { useRouter } from 'next/router';
-import InputMask from 'react-input-mask';
+import api from '../utils/api';
 
 const Select = styled.select`
   z-index: 10;
@@ -81,6 +81,15 @@ export default function Formulario() {
   const [ quemVisitou, setQuemVisitou ] = useState('');
   const [ validation, setValidation ] = useState([false, false, false]);
   const [ aceite, setAceite ] = useState('sim');
+  const [ hosts, setHosts ] = useState([]);
+  useEffect( () => {
+    async function fetchData() {
+      const response = await api.get('api/index-hosts');
+      setHosts(response.data);
+      console.log(response.data)
+    }
+    fetchData();
+  }, [])
     
     return(
         <BackgroundInputs>
@@ -144,11 +153,11 @@ export default function Formulario() {
                       setValidation(newValidation)
                     }
                   }}>
-                    <option value=""></option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                    {hosts.map((host, index) => {
+                      return (
+                        <option key={index} value={host.nome_usuario}>{host.nome_usuario}</option>
+                      )
+                    })}
                   </Select>
                   
                   <ContainerSwitch>

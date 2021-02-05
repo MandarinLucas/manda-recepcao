@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@prisma/client": "2.16.0",
+    "axios": "^0.21.1",
     "mandrill-api": "^1.0.45",
     "moment": "^2.29.1",
     "next": "latest",
