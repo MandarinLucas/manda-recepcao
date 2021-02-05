@@ -73,6 +73,7 @@ const Switch = styled.input `
 
 export default function Formulario() {
   const router = useRouter();
+  const {perfil} = router.query;
     
     return(
         <BackgroundInputs>
@@ -109,7 +110,8 @@ export default function Formulario() {
                   <Widget.Section>
                       <Widget.Button onClick={() => 
                           router.push({
-                          pathname: '/email'
+                          pathname: '/email',
+                          query: {perfil}
                           })
                           }>
                             Voltar

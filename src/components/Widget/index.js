@@ -96,6 +96,8 @@ Widget.Button = styled.button`
   z-index: 10;
   cursor: pointer;
   border-style: none;
+  outline: 0;
+
 `;
 
 export default Widget;
