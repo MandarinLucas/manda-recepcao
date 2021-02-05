@@ -169,7 +169,11 @@ export default function Formulario() {
                           }>
                             Voltar
                         </Widget.Button>
-                      <Widget.Button disabled={validation.includes(false) ? true : false }>Confirmar</Widget.Button>
+                      <Widget.Button disabled={validation.includes(false) ? true : false } onClick={() => 
+                          router.push({
+                          pathname: '/confirmacao'
+                          })
+                          }>Confirmar</Widget.Button>
                   </Widget.Section>
               </Widget.Body>
           </Widget>

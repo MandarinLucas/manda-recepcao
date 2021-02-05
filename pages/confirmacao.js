@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Widget from '../src/components/Widget';
@@ -24,6 +24,7 @@ const Button = styled.div`
 
 export default function Home() {
   const router = useRouter();
+  const nome = useState('');
   
   return (
     <Background>
@@ -34,7 +35,7 @@ export default function Home() {
      
       <Widget.Content>
         <img src='logo.png' className="LogoMandarin"/>
-        <h1>Seja bem-vindo à Mandarin Calango,  já iremos te receber! </h1>
+        <h1>Seja bem-vindo à Mandarin {nome},  já iremos te receber! </h1>
         
         <Button onClick={() => 
         router.push({
