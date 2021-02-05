@@ -47,6 +47,11 @@ Widget.Content = styled.div`
     width: 300px;
     height: 70px;
   }
+
+  h1 {
+    z-index: 10;
+    color: #757575;
+  }
 `;
 
 Widget.Input = styled.input`

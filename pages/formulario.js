@@ -116,7 +116,11 @@ export default function Formulario() {
                           }>
                             Voltar
                         </Widget.Button>
-                      <Widget.Button>Confirmar</Widget.Button>
+                      <Widget.Button onClick={() => 
+                          router.push({
+                          pathname: '/confirmacao'
+                          })
+                          }>Confirmar</Widget.Button>
                   </Widget.Section>
               </Widget.Body>
           </Widget>
