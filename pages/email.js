@@ -8,8 +8,7 @@ import { useRouter } from 'next/router';
 export default function Email() {
     const [email, setEmail] = useState('');
     const router = useRouter();
-    const {perfil} = router.query
-    console.log(email);
+    const {perfil} = router.query;
 
     function validationEmail() {
         const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
