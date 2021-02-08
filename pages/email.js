@@ -43,10 +43,11 @@ export default function Email() {
                     </Widget.P>
                     <Widget.Input error={error} type="email" placeholder="E-mail" value={email} onChange={(e) => {
                         setEmail(e.target.value)
+                        setError(false)
                     }}/>
-                    <Widget.P>
+                    <Widget.Erro>
                         {error ? "Digite um e-mail válido." : ""}
-                    </Widget.P>
+                    </Widget.Erro>
                     <Widget.Section>
                         <Widget.Button onClick={() => 
                             router.push({

@@ -109,6 +109,12 @@ Widget.P = styled.p`
   font-size: 1.125em;
   display: flex;
 `;
+Widget.Erro = styled.p`
+  color: red;
+  font-size: 1.125em;
+  height: 25px;
+  display: flex;
+`;
 Widget.Section = styled.section`
   display: flex;
   justify-content: space-between;
