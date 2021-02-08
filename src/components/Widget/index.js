@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import InputMask from 'react-input-mask';
 
 const Widget = styled.div`
-background-color: #ede2d5;
-overflow: hidden;
+  background-color: #ede2d5;
+  overflow: hidden;
 
-h1, h2, h3 {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 0;
-}
-/* p {
+  h1,
+  h2,
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+  /* p {
   align-items: left;
   font-size: 14px;
   font-weight: 400;
@@ -26,20 +28,17 @@ Widget.Body = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateY(-50%) translateX(-50%)
-    
+  transform: translateY(-50%) translateX(-50%);
 `;
 
-
 Widget.Content = styled.div`
-
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
   align-items: center;
 
-.LogoMandarin {
+  .LogoMandarin {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +67,13 @@ Widget.Input = styled.input`
   color: #333333;
   width: 70vw;
   height: 1vh;
+
+    -webkit-box-shadow: ${(props) =>
+      props.error ? 'inset 0px 0px 0px 5px red' : ''};
+    -moz-box-shadow: ${(props) =>
+      props.error ? 'inset 0px 0px 0px 5px red' : ''};
+    box-shadow: ${(props) =>
+      props.error ? 'inset 0px 0px 0px 5px red' : ''};
 
   &:focus {
     outline: none;
@@ -102,17 +108,16 @@ Widget.P = styled.p`
   color: #333333;
   font-size: 1.125em;
   display: flex;
-`
+`;
 Widget.Section = styled.section`
   display: flex;
   justify-content: space-between;
 `;
 
-
 Widget.Button = styled.button`
   display: flex;
   justify-content: center;
-  background: #00C389;
+  background: #00c389;
   padding: 2vh 2vh;
   border-radius: 0.5em;
   color: white;
@@ -127,7 +132,7 @@ Widget.Button = styled.button`
   outline: 0;
 
   &:disabled {
-    opacity: .4;
+    opacity: 0.4;
   }
 `;
 

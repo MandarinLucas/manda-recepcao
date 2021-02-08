@@ -7,16 +7,17 @@ import { useRouter } from 'next/router';
 
 export default function Email() {
     const [email, setEmail] = useState('');
+    const [error, setError] = useState(false)
     const router = useRouter();
     const {perfil} = router.query;
 
     function validationEmail() {
-        const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+        const regexEmail = /^[a-z0-9._]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
         const emailLowerCase = email.toLocaleLowerCase();
 
         if (!regexEmail.test(emailLowerCase)) {
-        alert('Digite um email válido');
+        setError(true)
         return;
         }  
         router.push({
@@ -40,9 +41,12 @@ export default function Email() {
                     <Widget.P>
                         Seu e-mail
                     </Widget.P>
-                    <Widget.Input type="email" placeholder="E-mail" value={email} onChange={(e) => {
+                    <Widget.Input error={error} type="email" placeholder="E-mail" value={email} onChange={(e) => {
                         setEmail(e.target.value)
                     }}/>
+                    <Widget.P>
+                        {error ? "Digite um e-mail válido." : ""}
+                    </Widget.P>
                     <Widget.Section>
                         <Widget.Button onClick={() => 
                             router.push({
