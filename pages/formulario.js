@@ -113,7 +113,7 @@ export default function Formulario() {
 
     if(response.status === 201) {
       router.push({
-        pathname: '/erro',
+        pathname: '/confirmacao',
         query: {
           nome : nome
         }
