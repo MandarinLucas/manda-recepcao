@@ -74,7 +74,7 @@ const Switch = styled.input `
 
 export default function Formulario() {
   const router = useRouter();
-  const {perfil} = router.query;
+  const {perfil, email} = router.query;
 
   const [ celular, setCelular ] = useState('');
   const [ nome, setNome ] = useState('');
@@ -86,6 +86,15 @@ export default function Formulario() {
     async function fetchData() {
       const response = await api.get('api/index-hosts');
       setHosts(response.data);
+      const visitorResponse = await api.post('api/check-visitor', {
+        email
+      });
+      const {visitor, registered} =  visitorResponse.data
+      if (registered) {
+        setNome(visitor.nome)
+        setCelular(visitor.celular)
+        setCelular(visitor.celular)
+      }
     }
     fetchData();
   }, [])
@@ -121,7 +130,7 @@ export default function Formulario() {
                       Celular
                   </Widget.P>
                   <Widget.InputMask 
-                  autocomplete= "off"
+                  autoComplete= "off"
                   mask='(99) 99999-9999' 
                   maskChar=''
                   value={celular} 
