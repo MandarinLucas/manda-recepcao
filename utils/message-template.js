@@ -32,7 +32,7 @@ const htmlTemplateGenerator = (nome, quemvisitou, perfil) => {
         <br>
         <br>
         <br>
-        <a href="http://www.google.com/calendar/event?action=TEMPLATE&dates=".date('Ymd')."T".date('His', strtotime('+3 hours'))."Z%2F".date('Ymd')."T".date('His', strtotime('+4 hours'))."Z&text=".$titulo."&location=Mandarin" style='padding: 20px; color: #ffffff; background-color: #00C389; text-decoration: none;line-height:1; font-family:Arial, sans-serif; font-size:20px; line-height:1;'>
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Reuni%C3%A3o+com+${nome}+(${perfil})&details=Reuni%C3%A3o+com+${nome}+(${perfil})&location=Mandarin" style='padding: 20px; color: #ffffff; background-color: #00C389; text-decoration: none;line-height:1; font-family:Arial, sans-serif; font-size:20px; line-height:1;'>
           <strong>RESERVE AGORA</strong>
         </a>
         <br>
