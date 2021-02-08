@@ -89,6 +89,7 @@ export default function Formulario() {
       const visitorResponse = await api.post('api/check-visitor', {
         email
       });
+      console.log(visitorResponse)
       const {visitor, registered} =  visitorResponse.data
       if (registered) {
         setNome(visitor.nome)
@@ -98,6 +99,36 @@ export default function Formulario() {
     }
     fetchData();
   }, [])
+
+  const handleSubmit = async () => {
+    const response = await api.post('api/arrived',{
+      nome,
+      email,
+      celular,
+      aceite,
+      quemvisitou: quemVisitou,
+      perfil
+    })
+
+    if(response.status === 201) {
+      router.push({
+        pathname: '/confirmacao',
+        query: {
+          nome : nome
+        }
+        })
+    }
+
+    if(response.status === 400) {
+      alert('Ocorreu um erro em avisar a sua chegada, procure alguém na recepção para informar a sua chegada.')
+      router.push({
+        pathname: '/confirmacao',
+        query: {
+          nome : nome
+        }
+        })
+    }
+  }
     
     return(
         <BackgroundInputs>
@@ -191,14 +222,7 @@ export default function Formulario() {
                           }>
                             Voltar
                         </Widget.Button>
-                      <Widget.Button disabled={validation.includes(false) ? true : false } onClick={() => 
-                          router.push({
-                          pathname: '/confirmacao',
-                          query: {
-                            nome : nome
-                          }
-                          })
-                          }>Confirmar</Widget.Button>
+                      <Widget.Button disabled={validation.includes(false) ? true : false } onClick={handleSubmit}>Confirmar</Widget.Button>
                   </Widget.Section>
               </Widget.Body>
           </Widget>

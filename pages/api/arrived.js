@@ -17,7 +17,7 @@ const arrived = async (req, res) => {
   const { nome, email, perfil, celular, aceite, quemvisitou } = req.body;
   console.log(req.body);
 
-  let quemVisitou 
+  let quemVisitouEmail 
   try {
     await prisma.visitantes.create({
       data: {
@@ -38,7 +38,7 @@ const arrived = async (req, res) => {
       }
     });
 
-    quemVisitou = user
+    quemVisitouEmail = user
   } catch (err) {
     res.statusCode = 400;
     res.json({ error: `Error to record data to database - ${err}` });
@@ -46,7 +46,7 @@ const arrived = async (req, res) => {
     return res;
   }
 
-  const htmlMessage = htmlTemplateGenerator(nome, quemvisitou.email_usuario, perfil);
+  const htmlMessage = htmlTemplateGenerator(nome, quemVisitouEmail.email_usuario, perfil);
   const subject = `Reunião com ${nome} (${perfil})`;
 
   const message = {
@@ -57,8 +57,8 @@ const arrived = async (req, res) => {
     "from_name": 'Apoio Mandarin - Recepção',
     "to": [
       {
-        "email": quemVisitou.email_usuario,
-        "name": quemVisitou.nome_usuario,
+        "email": quemVisitouEmail.email_usuario,
+        "name": quemVisitouEmail.nome_usuario,
         "type": 'to'
       },
     ]
