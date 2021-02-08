@@ -46,7 +46,7 @@ const arrived = async (req, res) => {
     return res;
   }
 
-  const htmlMessage = htmlTemplateGenerator(nome, quemVisitouEmail.email_usuario, perfil);
+  const htmlMessage = htmlTemplateGenerator(nome, quemVisitouEmail.nome_usuario, perfil);
   const subject = `Reunião com ${nome} (${perfil})`;
 
   const message = {
