@@ -93,7 +93,7 @@ export default function Formulario() {
       if (registered) {
         setNome(visitor.nome)
         setCelular(visitor.celular)
-        setCelular(visitor.celular)
+        setAceite(visitor.aceite)
       }
     }
     fetchData();
@@ -118,7 +118,7 @@ export default function Formulario() {
                   onChange={e => {
                     setNome(e.target.value);
                     let newValidation = validation;
-                    if (nome.length > 0) {
+                    if (e.target.value.length > 1) {
                       newValidation[0] = true;
                       setValidation(newValidation)
                     } else {
@@ -140,7 +140,7 @@ export default function Formulario() {
                   onChange={e => {
                     setCelular(e.target.value)
                     let newValidation = validation;
-                    if (celular.length === 15) {
+                    if (e.target.value.length === 15) {
                       newValidation[1] = true;
                       setValidation(newValidation)
                     } else {
@@ -154,7 +154,7 @@ export default function Formulario() {
                   <Select name="cars" id="cars" value={quemVisitou} onChange={e => {
                     setQuemVisitou(e.target.value);
                     let newValidation = validation;
-                    if (quemVisitou.length >= 0) {
+                    if (e.target.value.length > 0) {
                       newValidation[2] = true;
                       setValidation(newValidation)
                     } else {
@@ -162,6 +162,7 @@ export default function Formulario() {
                       setValidation(newValidation)
                     }
                   }}>
+                    <option value="">Selecione</option>
                     {hosts.map((host, index) => {
                       if(host.ativo === 'não') {
                         return
