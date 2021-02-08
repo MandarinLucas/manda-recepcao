@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import Widget from '../src/components/Widget';
 import Background from '../src/components/Background';
 import { useRouter } from 'next/router';
-import api from '../utils/api';
-
 
 const Button = styled.div`
   display: flex;
@@ -31,6 +29,13 @@ export default function Home() {
   const router = useRouter();
   const {nome} = router.query;
   
+  useEffect(() => {
+    setTimeout(() => {
+      router.push({
+        pathname: '/',
+      })
+    }, 20000)
+  },[])
   
   return (
     <Background>
@@ -44,11 +49,12 @@ export default function Home() {
         <h1>Seja bem-vindo à Mandarin, <Span>{nome.split(' ').slice(0 , 1)}</Span>!<br/>
         Já iremos te receber! </h1>
         
-        <Button onClick={() => 
-        router.push({
-          pathname: '/',
-        })
-        }>
+        <Button onClick={() => {
+          clearTimeout()
+          router.push({
+            pathname: '/',
+          })
+        }}>
           Início
         </Button>
       </Widget.Content> 

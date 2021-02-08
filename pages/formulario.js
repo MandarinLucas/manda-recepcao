@@ -95,6 +95,7 @@ export default function Formulario() {
         setNome(visitor.nome)
         setCelular(visitor.celular)
         setAceite(visitor.aceite)
+        setValidation([true, true, false])
       }
     }
     fetchData();
