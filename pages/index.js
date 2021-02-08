@@ -45,6 +45,9 @@ export default function Home() {
         <img src='logo.png' className="LogoMandarin"/>
 
         {hosts.map((host, index) => {
+          if(host.status_perfil !== 'Ativo') {
+            return
+          }
           return (
             <Button key={index} onClick={() => 
               router.push({

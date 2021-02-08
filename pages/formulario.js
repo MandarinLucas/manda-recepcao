@@ -154,6 +154,9 @@ export default function Formulario() {
                     }
                   }}>
                     {hosts.map((host, index) => {
+                      if(host.ativo === 'não') {
+                        return
+                      }
                       return (
                         <option key={index} value={host.nome_usuario}>{host.nome_usuario}</option>
                       )
