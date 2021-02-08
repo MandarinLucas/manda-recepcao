@@ -113,7 +113,7 @@ export default function Formulario() {
 
     if(response.status === 201) {
       router.push({
-        pathname: '/confirmacao',
+        pathname: '/erro',
         query: {
           nome : nome
         }
@@ -121,9 +121,8 @@ export default function Formulario() {
     }
 
     if(response.status === 400) {
-      alert('Ocorreu um erro em avisar a sua chegada, procure alguém na recepção para informar a sua chegada.')
       router.push({
-        pathname: '/confirmacao',
+        pathname: '/erro',
         query: {
           nome : nome
         }
