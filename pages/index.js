@@ -60,49 +60,6 @@ export default function Home() {
           )
           
         })}
-        {/* <Button onClick={() => 
-        router.push({
-          pathname: '/email',
-          query: {
-            perfil: "Cliente"
-          }
-        })
-        }>
-          Cliente
-        </Button>
-
-        <Button onClick={() => 
-        router.push({
-          pathname: '/email',
-          query: {
-            perfil: "Fornecedor"
-          }
-        })
-        }> 
-          Fornecedor
-        </Button>
-
-        <Button onClick={() => 
-        router.push({
-          pathname: '/email',
-          query: {
-            perfil: "Candidato"
-          }
-        })
-        }>
-          Candidato
-        </Button>
-        
-        <Button onClick={() => 
-        router.push({
-          pathname: '/email',
-          query: {
-            perfil: "Outros"
-          }
-        })
-        }>
-          Outros
-        </Button> */}
       </Widget.Content> 
     </Background>
   );
