@@ -46,7 +46,7 @@ export default function Home() {
      
       <Widget.Content>
         <img src='logo.png' className="LogoMandarin"/>
-        <h1>Olá, <Span>{nome.split(' ').slice(0 , 1)}</Span>, ocorreu um erro ao avisar a sua chegada,<br/>
+        <h1>Olá, <Span>{!nome ? '' : nome.split(' ').slice(0 , 1)}</Span>, ocorreu um erro ao avisar a sua chegada,<br/>
         procure alguém na recepção para ajudá-lo(a), ou tente novamente.</h1>
         
         <Button onClick={() => {
