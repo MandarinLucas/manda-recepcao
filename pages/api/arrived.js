@@ -6,11 +6,13 @@ import htmlTemplateGenerator from '../../utils/message-template';
 const mandrillClient = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 
 const prisma = new PrismaClient();
+await prisma.$connect()
 
 const arrived = async (req, res) => {
   if (req.method !== 'POST') {
     res.statusCode = 405;
     res.json({ error: `This endpoint do not receive ${req.method} request` });
+    await prisma.$disconnect()
     return res;
   }
 
@@ -43,6 +45,7 @@ const arrived = async (req, res) => {
     res.statusCode = 400;
     res.json({ error: `Error to record data to database - ${err}` });
     console.log(err);
+    await prisma.$disconnect()
     return res;
   }
 
@@ -81,12 +84,14 @@ const arrived = async (req, res) => {
       console.log("result", result);
       res.statusCode = 201;
       res.json({ message: `Email enviado com sucesso.` });
+      await prisma.$disconnect()
       return res;
     },
     function(err) {
       res.statusCode = 400;
       res.json({ error: `Error to send e-mail - ${err.message}` });
       console.log(err);
+      await prisma.$disconnect()
       return res;
     }
   );

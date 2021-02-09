@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 await prisma.$connect()
 
-const indexHost = async(req, res) => {
+const indexPerfis = async(req, res) => {
   if (req.method !== 'GET') {
     res.statusCode = 405;
     res.json({ error: `This endpoint do not receive ${req.method} request` });
@@ -12,9 +12,10 @@ const indexHost = async(req, res) => {
   }
 
   try {
-    const hosts = await prisma.usuarios.findMany()
+    const perfis = await prisma.perfis.findMany()
+
     res.statusCode = 200;
-    res.json(hosts)
+    res.json(perfis)
     await prisma.$disconnect()
     return res;
 
@@ -28,4 +29,4 @@ const indexHost = async(req, res) => {
 
 }
 
-export default indexHost;
+export default indexPerfis;
