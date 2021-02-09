@@ -8,9 +8,11 @@ const mandrillClient = new mandrill.Mandrill(process.env.MANDRILL_KEY);
 const prisma = new PrismaClient();
 
 const arrived = async (req, res) => {
+  await prisma.$connect()
   if (req.method !== 'POST') {
     res.statusCode = 405;
     res.json({ error: `This endpoint do not receive ${req.method} request` });
+    await prisma.$disconnect()
     return res;
   }
 
@@ -43,6 +45,7 @@ const arrived = async (req, res) => {
     res.statusCode = 400;
     res.json({ error: `Error to record data to database - ${err}` });
     console.log(err);
+    await prisma.$disconnect()
     return res;
   }
 
@@ -69,6 +72,7 @@ const arrived = async (req, res) => {
   const send_at = new Date();
 
   //const messageJSON = JSON.stringify(message)
+  await prisma.$disconnect()
 
   mandrillClient.messages.send(
     {
