@@ -46,7 +46,7 @@ export default function Home() {
      
       <Widget.Content>
         <img src='logo.png' className="LogoMandarin"/>
-        <h1>Seja bem-vindo à Mandarin, <Span>{nome.split(' ').slice(0 , 1)}</Span>!<br/>
+        <h1>Seja bem-vindo à Mandarin, <Span>{!nome ? '' : nome.split(' ').slice(0 , 1)}</Span>!<br/>
         Já iremos te receber! </h1>
         
         <Button onClick={() => {
