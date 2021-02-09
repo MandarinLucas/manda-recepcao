@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import styled from 'styled-components';
-import Widget from '../src/components/Widget';
-import Background from '../src/components/Background';
-import { useRouter } from 'next/router';
-import api from '../utils/api';
-
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import styled from "styled-components";
+import Widget from "../src/components/Widget";
+import Background from "../src/components/Background";
+import { useRouter } from "next/router";
+import api from "../utils/api";
 
 const Button = styled.div`
   display: flex;
   justify-content: center;
-  background: #00C389;
+  background: #00c389;
   padding: 2vh 2vh;
   border-radius: 0.5em;
   color: white;
@@ -21,46 +21,57 @@ const Button = styled.div`
   align-self: center;
   z-index: 10;
   cursor: pointer;
-`
+`;
 
 export default function Home() {
   const router = useRouter();
-  const [hosts , setHosts] = useState([]);
-  useEffect( () => {
+  const [hosts, setHosts] = useState([]);
+  const [onLoad, setOnLoad] = useState(null);
+
+  useEffect(() => {
     async function fetchData() {
-      const response = await api.get('api/index-perfis');
+      setOnLoad(true);
+      const response = await api.get("api/index-perfis");
       setHosts(response.data);
+      setOnLoad(false);
     }
     fetchData();
-  }, [])
-  
+  }, []);
+
   return (
     <Background>
-      <Background.Image src="bg.png"/>
+      <Background.Image src="bg.png" />
       <Head>
         <title>Mandarin - Recepção</title>
       </Head>
-     
-      <Widget.Content>
-        <img src='logo.png' className="LogoMandarin"/>
 
-        {hosts.map((host, index) => {
-          if(host.status_perfil !== 'Ativo') {
-            return
-          }
-          return (
-            <Button key={index} onClick={() => 
-              router.push({
-                pathname: '/email',
-                query: {
-                  perfil: host.nome_perfil
+      <Widget.Content>
+        <img src="logo.png" className="LogoMandarin" />
+        {onLoad ? (
+          <Image src="/spinner.svg" width={50} height={50}></Image>
+        ) : (
+          hosts.map((host, index) => {
+            if (host.status_perfil !== "Ativo") {
+              return;
+            }
+            return (
+              <Button
+                key={index}
+                onClick={() =>
+                  router.push({
+                    pathname: "/email",
+                    query: {
+                      perfil: host.nome_perfil,
+                    },
+                  })
                 }
-              })
-              }>{host.nome_perfil}</Button>
-          )
-          
-        })}
-      </Widget.Content> 
+              >
+                {host.nome_perfil}
+              </Button>
+            );
+          })
+        )}
+      </Widget.Content>
     </Background>
   );
 }

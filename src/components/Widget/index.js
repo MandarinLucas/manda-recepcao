@@ -81,6 +81,10 @@ Widget.Input = styled.input`
     -moz-box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
     box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
   }
+
+  &:disabled {
+    opacity: 0.6;
+  }
 `;
 
 Widget.InputMask = styled(InputMask)`
@@ -102,6 +106,10 @@ Widget.InputMask = styled(InputMask)`
     -moz-box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
     box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
   }
+
+  &:disabled {
+    opacity: 0.4;
+  }
 `;
 
 Widget.P = styled.p`
@@ -118,6 +126,7 @@ Widget.Erro = styled.p`
 Widget.Section = styled.section`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 Widget.Button = styled.button`

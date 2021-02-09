@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import styled from 'styled-components';
 import Widget from '../src/components/Widget';
 import BackgroundInputs from '../src/components/BackgroundInputs';
@@ -10,7 +11,7 @@ const Select = styled.select`
   z-index: 10;
   top: 0;
   background: white;
-  padding: 1vh 3vw;
+  padding: 1vh 1.5vw;
   margin: 0 0 2vh 0;
   font-size: 1.375em;
   border-radius: 0.5em;
@@ -24,6 +25,10 @@ const Select = styled.select`
     -webkit-box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
     -moz-box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
     box-shadow: inset 0px 0px 0px 5px rgba(4, 153, 109, 1);
+  }
+
+    &:disabled {
+    opacity: 0.6;
   }
 `;
 
@@ -82,13 +87,18 @@ export default function Formulario() {
   const [ validation, setValidation ] = useState([false, false, false]);
   const [ aceite, setAceite ] = useState('sim');
   const [ hosts, setHosts ] = useState([]);
+  const [onLoad, setOnLoad] = useState(false);
+
+  
   useEffect( () => {
     async function fetchData() {
+      setOnLoad(true);
       const response = await api.get('api/index-hosts');
       setHosts(response.data);
       const visitorResponse = await api.post('api/check-visitor', {
         email
       });
+      
       console.log(visitorResponse)
       const {visitor, registered} =  visitorResponse.data
       if (registered) {
@@ -97,11 +107,13 @@ export default function Formulario() {
         setAceite(visitor.aceite)
         setValidation([true, true, false])
       }
+      setOnLoad(false);
     }
     fetchData();
   }, [])
 
   const handleSubmit = async () => {
+    setOnLoad(true);
     const response = await api.post('api/arrived',{
       nome,
       email,
@@ -110,6 +122,7 @@ export default function Formulario() {
       quemvisitou: quemVisitou,
       perfil
     })
+    setOnLoad(false);
 
     if(response.status === 201) {
       router.push({
@@ -145,7 +158,8 @@ export default function Formulario() {
                   <Widget.Input 
                   type="text" 
                   placeholder="Nome" 
-                  value={nome} 
+                  value={nome}
+                  disabled={onLoad}
                   onChange={e => {
                     setNome(e.target.value);
                     let newValidation = validation;
@@ -162,6 +176,7 @@ export default function Formulario() {
                   </Widget.P>
                   <Widget.InputMask 
                   autoComplete= "off"
+                  disabled={onLoad}
                   mask='(99) 99999-9999' 
                   maskChar=''
                   value={celular} 
@@ -182,7 +197,12 @@ export default function Formulario() {
                   <Widget.P>
                     Vai se encontrar com: 
                   </Widget.P>
-                  <Select name="cars" id="cars" value={quemVisitou} onChange={e => {
+                  <Select
+                  name="cars"
+                  id="cars"
+                  value={quemVisitou}
+                  disabled={onLoad}
+                  onChange={e => {
                     setQuemVisitou(e.target.value);
                     let newValidation = validation;
                     if (e.target.value.length > 0) {
@@ -215,14 +235,22 @@ export default function Formulario() {
 
                   <Widget.Section>
                       <Widget.Button onClick={() => 
-                          router.push({
-                          pathname: '/email',
-                          query: {perfil}
-                          })
-                          }>
-                            Voltar
-                        </Widget.Button>
-                      <Widget.Button disabled={validation.includes(false) ? true : false } onClick={handleSubmit}>Confirmar</Widget.Button>
+                        router.push({
+                        pathname: '/email',
+                        query: {perfil}
+                        })
+                        }>
+                          Voltar
+                      </Widget.Button>
+                      {
+                        onLoad
+                        &&
+                        <Image src="/spinner.svg" width={50} height={50}></Image>
+                      }
+                      
+                      <Widget.Button
+                      disabled={validation.includes(false) ? true : false }
+                      onClick={handleSubmit}>Confirmar</Widget.Button>
                   </Widget.Section>
               </Widget.Body>
           </Widget>
